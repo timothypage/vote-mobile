@@ -22,7 +22,7 @@ defmodule VoteMobile.Quiz.Server do
     GenServer.call(quiz_server, {:questions})
   end
 
-  # Server methonds
+  # Server methods
 
   def init(name) do
     {:ok, {name, Quiz.new}}
