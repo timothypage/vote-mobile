@@ -36,8 +36,12 @@ defmodule VoteMobile.Quiz.Server do
     }
   end
 
-  def handle_call({:questions}, _req_id, state) do
-    {:reply, state, state}
+  def handle_call({:questions}, _req_id, {name, quiz}) do
+    {
+      :reply, 
+      quiz.questions, 
+      {name, quiz}
+    }
   end
 
   defp via_tuple(name) do

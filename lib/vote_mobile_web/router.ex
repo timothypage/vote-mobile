@@ -13,6 +13,14 @@ defmodule VoteMobileWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", VoteMobileWeb do
+    pipe_through :api
+
+    post "/quiz/:quiz_id/add-question", QuizController, :add
+    post "/quiz/create", QuizController, :create
+    get  "/quiz/:quiz_id", QuizController, :show
+  end
+
   scope "/", VoteMobileWeb do
     pipe_through :browser # Use the default browser stack
 
