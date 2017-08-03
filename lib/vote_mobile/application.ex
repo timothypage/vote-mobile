@@ -12,6 +12,7 @@ defmodule VoteMobile.Application do
       supervisor(VoteMobileWeb.Endpoint, []),
       # Start your own worker by calling: VoteMobile.Worker.start_link(arg1, arg2, arg3)
       # worker(VoteMobile.Worker, [arg1, arg2, arg3]),
+      supervisor(VoteMobile.Quiz.ServerSupervisor, [])
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
