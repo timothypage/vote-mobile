@@ -41,6 +41,7 @@ defmodule VoteMobile.Mixfile do
 
       {:gproc, "~> 0.6.1"},
       {:uuid, "~> 1.1"},
+      {:cors_plug, "~> 1.4"},
 
     ]
   end

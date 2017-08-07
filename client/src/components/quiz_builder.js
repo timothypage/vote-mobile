@@ -3,7 +3,7 @@ import Question from './question'
 
 import { connect } from 'react-redux'
 
-import { addQuestion } from '../actions'
+import { addQuestion, getQuizId } from '../actions'
 
 class QuizBuilder extends React.Component {
   constructor() {
@@ -12,13 +12,20 @@ class QuizBuilder extends React.Component {
       new_quiz_name: ''
     }
   }
+
+  componentDidMount() {
+    this.props.getQuizId()
+  }
+
   render() {
   	return (
   	  <div className="quiz-builder">
   	    <h2>Quiz Builder</h2>
-        {this.props.questions.map( question => <Question question={question}/> )}
+        <h3>ID: {this.props.quiz.id}</h3>
+        {this.props.questions.map( question => <Question key={question.id || question.text} question={question}/> )}
 
-        <input type="text" value={this.state.new_quiz_name} onChange={(e) => this.setState({new_quiz_name: e.target.value})}/>
+        <input type="text" value={this.state.new_quiz_name} onChange={(e) => this.setState({new_quiz_name: e.target.value})}
+          onKeyPress={ (e) => {e.key === 'Enter' ? this.addQuestion() : null} }/>
   	    <button className="btn btn-primary" onClick={() => this.addQuestion()}>Add Question</button>
   	  </div>
   	)
@@ -32,13 +39,17 @@ class QuizBuilder extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-  return { questions: state.questions }
+  return { questions: state.questions, quiz: state.quiz }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
     addQuestion(new_quiz_name) {
       dispatch(addQuestion(new_quiz_name))
+    },
+
+    getQuizId() {
+      dispatch(getQuizId())
     }
   }
 }

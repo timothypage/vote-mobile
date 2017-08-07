@@ -38,6 +38,8 @@ defmodule VoteMobileWeb.Endpoint do
     key: "_vote_mobile_key",
     signing_salt: "p/sKPNzu"
 
+  plug CORSPlug
+
   plug VoteMobileWeb.Router
 
   @doc """
